@@ -1,4 +1,6 @@
-const forms = () => {
+import { postData } from "../services/requests";
+
+const forms = (state) => {
     const inputs = document.querySelectorAll('input'),
         forms = document.querySelectorAll('form'),
         modals = document.querySelectorAll('[data-modal]'),
@@ -41,19 +43,17 @@ const forms = () => {
         })
     }
 
-    const postData = async (url, data) => {
-        const res = await fetch(url, {
-            method: "POST",
-            body: data
-        })
-
-        return await res.text();
-    }
 
     forms.forEach(form => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(form);
+
+            if (form.classList.contains('form-calc')) {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
 
             const status = document.createElement('div'),
                     statusImg = document.createElement('img'),

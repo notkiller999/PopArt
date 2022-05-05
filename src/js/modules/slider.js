@@ -49,7 +49,7 @@ const slider = (slides, dir, next, prev) => {
         if (dir === 'vertical') {
             paused = setInterval(() => {
                 items.forEach(item => {
-                    item.classList.add('slideInDown');
+                    item.classList.add('slideInUp');
                 });
                 changeSlide(1);
             }, 3000)
